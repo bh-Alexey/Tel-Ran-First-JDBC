@@ -11,7 +11,7 @@ public class MainDAO {
 
         CarDAO carDAO = new CarDAO(connection);
 
-        List<Car> cars = carDAO.getAllCars();
+        List<Car> cars = carDAO.getAllCars(20);
 
 //        Car car = new Car(10, "BMW", "Germany");
 //        carDAO.insertCar(car);

@@ -14,11 +14,11 @@ public class CarDAO {
         this.connection = connection;
     }
 
-    public List<Car> getAllCars() throws SQLException {
+    public List<Car> getAllCars(int pageSize) throws SQLException {
         List<Car> list = new ArrayList<>();
 
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM car");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM car ORDER BY car.id LIMIT " + pageSize + "  OFFSET 0");
 
         while (resultSet.next()) {
             int id = resultSet.getInt("id");
@@ -36,8 +36,8 @@ public class CarDAO {
         int id = car.getId();
         String name = car.getName();
         String country = car.getCountry();
-        String line = "INSERT INTO car VALUES (" + id + ", '" + name + "', '" + country + "');";
-        statement.execute(line);
+        String query = "INSERT INTO car VALUES (" + id + ", '" + name + "', '" + country + "');";
+        statement.execute(query);
     }
 
     public void deleteCar(int carID) throws SQLException {
