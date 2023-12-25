@@ -20,7 +20,7 @@ public class CarDAO {
         Statement statement = connection.createStatement();
         int paging = 0;
         if (pageNum > 1) {
-            paging = pageSize * pageNum - pageSize;
+            paging = pageSize * (pageNum - 1);
         }
         ResultSet resultSet = statement.executeQuery("SELECT * FROM car ORDER BY car.id LIMIT " + pageSize + "  OFFSET " + paging);
 
