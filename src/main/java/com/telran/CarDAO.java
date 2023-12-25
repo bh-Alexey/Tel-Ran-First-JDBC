@@ -14,11 +14,15 @@ public class CarDAO {
         this.connection = connection;
     }
 
-    public List<Car> getAllCars(int pageSize) throws SQLException {
+    public List<Car> getAllCars(int pageSize, int pageNum) throws SQLException {
         List<Car> list = new ArrayList<>();
 
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM car ORDER BY car.id LIMIT " + pageSize + "  OFFSET 0");
+        int paging = 0;
+        if (pageNum > 1) {
+            paging = pageSize * pageNum - pageSize;
+        }
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM car ORDER BY car.id LIMIT " + pageSize + "  OFFSET " + paging);
 
         while (resultSet.next()) {
             int id = resultSet.getInt("id");
